@@ -43,44 +43,128 @@ document.getElementById(cellsToSHow[i]).innerHTML = '<img class="sprites" style=
 
   }
   public turns = 0;
-  @HostListener('window:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    this.keypressed = event.key;
-    if (this.keypressed == 'ArrowLeft'){
-      if (this.currentY != 0){
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = '';
-        this.currentY = this.currentY - 1;
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = this.marioImg;
-        this.turns++;
-      }
-    }
-    else if (this.keypressed == 'ArrowRight'){
-      if (this.currentY < this.userInputWidth){
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = '';
-        this.currentY = this.currentY + 1;
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = this.marioImg;
-        this.turns++;
-      }
-    }
-    else if (this.keypressed == 'ArrowUp'){
-      if (this.currentX != 0){
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = '';
-        this.currentX = this.currentX - 1;
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = this.marioImg;
-        this.turns++;
-      }
-    }
-    else if (this.keypressed == 'ArrowDown'){
-      if (this.currentX < this.userInputHeight){
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = '';
-        this.currentX = this.currentX + 1;
-        document.getElementById(this.currentX.toString().concat(this.currentY.toString())).innerHTML = this.marioImg;
-        this.turns++;
-      }
-    }
-    if (document.getElementsByClassName('sprites').length == 0){
-      alert('It took you '+this.turns+' turns to clear all sprites.')
-    }
+  public startTime=0;
+  public timer;
+  increment() {
+    this.startTime++;
+    this.turns++;
   }
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+
+    this.keypressed = event.key;
+    var e = this;
+    var timer;
+    for(var i=0; i<=parseInt(document.getElementById("timer").innerHTML); i++)
+    {
+      window.clearInterval(i);
+    }
+    if (this.keypressed == 'ArrowLeft'){
+this.left();
+
+    }
+    else if (this.keypressed == 'ArrowRight'){
+      this.right();
+    }
+    else if (this.keypressed == 'ArrowUp'){
+      this.up();
+
+    }
+    else if (this.keypressed == 'ArrowDown'){
+this.down();
+    }
+
+  }
+right(){
+
+  var e = this;
+   var timer = setInterval(function(){
+document.getElementById("timer").innerHTML = timer.toString();
+
+    if (e.currentY  < e.userInputWidth - 1) {
+      document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = '';
+      e.currentY = e.currentY + 1;
+      e.turns++;
+      document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = e.marioImg;
+    }
+    else{
+      clearInterval(timer);
+      e.left();
+    }
+     if (document.getElementsByClassName('sprites').length == 0){
+       alert('It took you '+e.turns+' turns to clear all sprites.');
+       clearInterval(timer);
+     }
+  }, 500);
+}
+left(){
+
+var e = this;
+  var timer = setInterval(function(){
+    document.getElementById("timer").innerHTML = timer.toString();
+
+
+    if (e.currentY > 0) {
+      document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = '';
+      e.currentY = e.currentY - 1;
+      e.turns++;
+      document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = e.marioImg;
+    }
+    else{
+      clearInterval(timer);
+      e.right();
+    }
+    if (document.getElementsByClassName('sprites').length == 0){
+      alert('It took you '+e.turns+' turns to clear all sprites.');
+      clearInterval(timer);
+    }
+  }, 500);
+}
+
+  up(){
+    var e = this;
+    var timer = setInterval(function(){
+      document.getElementById("timer").innerHTML = timer.toString();
+
+
+      if (e.currentX > 0) {
+        document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = '';
+        e.currentX = e.currentX - 1;
+        e.turns++;
+        document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = e.marioImg;
+      }
+      else{
+        clearInterval(timer);
+        e.down();
+      }
+      if (document.getElementsByClassName('sprites').length == 0){
+        alert('It took you '+e.turns+' turns to clear all sprites.');
+        clearInterval(timer);
+      }
+    }, 500);
+  }
+
+  down(){
+
+    var e = this;
+    var timer = setInterval(function(){
+      document.getElementById("timer").innerHTML = timer.toString();
+
+      if (e.currentX < e.userInputHeight - 1) {
+        document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = '';
+        e.currentX = e.currentX + 1;
+        e.turns++;
+        document.getElementById(e.currentX.toString().concat(e.currentY.toString())).innerHTML = e.marioImg;
+      }
+      else{
+        clearInterval(timer);
+        e.up();
+      }
+      if (document.getElementsByClassName('sprites').length == 0){
+        alert('It took you '+e.turns+' turns to clear all sprites.');
+        clearInterval(timer);
+      }
+    }, 500);
+  }
 }
