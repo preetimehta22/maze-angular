@@ -56,10 +56,11 @@ document.getElementById(cellsToSHow[i]).innerHTML = '<img class="sprites" style=
     this.keypressed = event.key;
     var e = this;
     var timer;
-    for(var i=0; i<=parseInt(document.getElementById("timer").innerHTML); i++)
-    {
-      window.clearInterval(i);
-    }
+   for(var i = parseInt(document.getElementById("timer").innerHTML) - 5; i <= parseInt(document.getElementById("timer").innerHTML) + 5; i++){
+     window.clearInterval(i);
+   }
+
+
     if (this.keypressed == 'ArrowLeft'){
 this.left();
 
@@ -96,7 +97,7 @@ document.getElementById("timer").innerHTML = timer.toString();
        alert('It took you '+e.turns+' turns to clear all sprites.');
        clearInterval(timer);
      }
-  }, 500);
+  }, 200);
 }
 left(){
 
@@ -119,7 +120,7 @@ var e = this;
       alert('It took you '+e.turns+' turns to clear all sprites.');
       clearInterval(timer);
     }
-  }, 500);
+  }, 200);
 }
 
   up(){
@@ -142,7 +143,7 @@ var e = this;
         alert('It took you '+e.turns+' turns to clear all sprites.');
         clearInterval(timer);
       }
-    }, 500);
+    }, 200);
   }
 
   down(){
@@ -165,6 +166,6 @@ var e = this;
         alert('It took you '+e.turns+' turns to clear all sprites.');
         clearInterval(timer);
       }
-    }, 500);
+    }, 200);
   }
 }
