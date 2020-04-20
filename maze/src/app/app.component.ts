@@ -9,7 +9,7 @@ export class AppComponent implements OnInit, AfterViewInit{
   public current;
   public currentX;
   public currentY;
-  public marioImg = '<img style="display: block;margin: 0 auto;" width="50%;" src="https://tr.rbxcdn.com/de2cf68e8ea7e9a5461e6f6cb98ef885/420/420/Decal/Png">';
+  public marioImg = '<img style="display: block;margin: 0 auto;" width="80%;" src="../assets/images/super-mario.png">';
   public keypressed;
   public userInputWidth;
   public userInputHeight;
@@ -37,9 +37,9 @@ export class AppComponent implements OnInit, AfterViewInit{
     var filtered = cells.filter(function(value, index, arr){ return value != playerID;});
     var cellsToSHow = filtered.sort(() => Math.random() - Math.random()).slice(0, this.userInput);
     for (var i = 0; i < this.userInput; i++){
-document.getElementById(cellsToSHow[i]).innerHTML = '<img class="sprites" style="display: block;margin: 0 auto;" width="50%;" src="https://i.pinimg.com/originals/08/d8/9b/08d89ba3c1b2579797635f4a5b44a48e.png">';
+document.getElementById(cellsToSHow[i]).innerHTML = '<img class="sprites" style="display: block;margin: 0 auto;" width="50%;" src="../assets/images/sprite.png">';
     }
-    document.getElementById(playerID).innerHTML = '<img style="display: block;margin: 0 auto;" width="50%;" src="https://tr.rbxcdn.com/de2cf68e8ea7e9a5461e6f6cb98ef885/420/420/Decal/Png">';
+    document.getElementById(playerID).innerHTML = this.marioImg;
 
   }
   public turns = 0;
