@@ -1,7 +1,12 @@
-<table id="board" style="border-collapse: collapse;">
-  <tr *ngFor="let row of [].constructor(userInputHeight); let i = index">
-    <td *ngFor="let cell of [].constructor(userInputWidth); let j = index" class="cell" id="{{i}}{{j}}"
-        style="display: none;" style="width: 40px;height: 40px;border: 1px solid #000;"></td>
-  </tr>
-</table>
-<span style="visibility: hidden;" id="timer"></span>
+<div
+  style="width: fit-content;width: -moz-fit-content;margin: 0 auto;padding: 24px;-webkit-box-shadow: 2px 2px 6px 0px rgba(158,158,158,1); -moz-box-shadow: 2px 2px 6px 0px rgba(158,158,158,1); box-shadow: 2px 2px 6px 0px rgba(158,158,158,1);">
+  <h3 style="text-align: center;font-family: sans-serif;">Use the arrow keys to move your Mario.</h3>
+
+  <table id="board" style="border-collapse: collapse;margin: 0 auto;background: #000;">
+    <tr *ngFor="let row of [].constructor(userInputHeight); let i = index">
+      <td *ngFor="let cell of [].constructor(userInputWidth); let j = index" class="cell" id="{{i}}{{j}}"
+          style="display: none;" style="width: 40px;height: 40px;border: 1px solid #fff;"></td>
+    </tr>
+  </table>
+</div>
+<span id="timer" style="visibility: hidden;"></span>
